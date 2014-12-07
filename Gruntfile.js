@@ -50,6 +50,19 @@ module.exports = function(grunt) {
                 }
             }
         },
+        wdjs:{
+            options: {
+                desiredCapabilities: {
+                    browserName: 'chrome'
+                },
+                reporter: 'XUNIT',// can user all of these: Base | Dot | Doc | TAP | JSON | HTML | List | Min | Spec | Nyan | XUnit | Markdown | Progress | Landing | JSONCov | HTMLCov | JSONStream
+                logLevel: 'verbose'
+            },
+            local: {
+                tests: './test/wd/*.js',
+                output:'./reports/wd/output.xml'
+            }
+        }
 
     });
 
@@ -59,6 +72,7 @@ module.exports = function(grunt) {
     // By default, lint and run all tests.
     grunt.registerTask('default', ['jshint', 'webdriver']);
     // default task for testing
+    grunt.registerTask('wd', ['wdjs']);
     grunt.registerTask('test', ['webdriver:local']);
     grunt.registerTask('testTravis', ['webdriver:chrome_ci' ,'webdriver:chrome_ciTunnel']);
 
